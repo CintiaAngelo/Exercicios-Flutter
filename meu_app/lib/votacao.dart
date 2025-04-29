@@ -6,7 +6,7 @@ class VotacaoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const VotacaoPage(); // <<< Apenas isso! Sem MaterialApp aqui
+    return const VotacaoPage(); // Mantido como está
   }
 }
 
@@ -14,10 +14,10 @@ class VotacaoPage extends StatefulWidget {
   const VotacaoPage({super.key});
 
   @override
-  _VotacaoState createState() => _VotacaoState();
+  State<VotacaoPage> createState() => VotacaoState(); // ✅ agora usa classe pública
 }
 
-class _VotacaoState extends State<VotacaoPage> {
+class VotacaoState extends State<VotacaoPage> { // ✅ nome público
   int _contadorGatos = 0;
   int _contadorCachorros = 0;
 
@@ -45,7 +45,6 @@ class _VotacaoState extends State<VotacaoPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Simulador de Votação"),
-        // O botão de voltar vai aparecer automaticamente agora!
       ),
       body: Padding(
         padding: const EdgeInsets.all(24),

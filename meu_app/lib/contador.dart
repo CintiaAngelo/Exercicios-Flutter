@@ -5,11 +5,10 @@ class Contador extends StatefulWidget {
   const Contador({super.key});
   
   @override
-  _ContadorState createState() => _ContadorState();
+  State<Contador> createState() => ContadorState(); // ✅ Classe pública agora
 }
 
-
-class _ContadorState extends State<Contador> {
+class ContadorState extends State<Contador> { // ✅ Sem underline
   int _contador = 0;
 
   void _incrementar() {
@@ -33,7 +32,7 @@ class _ContadorState extends State<Contador> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Contador com Estado')),
+      appBar: AppBar(title: const Text('Contador com Estado')),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -44,15 +43,15 @@ class _ContadorState extends State<Contador> {
               color: _contador < 0 ? Colors.red : Colors.black,
             ),
           ),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ElevatedButton(onPressed: _incrementar, child: Text('+')),
-              SizedBox(width: 10),
-              ElevatedButton(onPressed: _decrementar, child: Text('-')),
-              SizedBox(width: 10),
-              ElevatedButton(onPressed: _resetar, child: Text('Resetar')),
+              ElevatedButton(onPressed: _incrementar, child: const Text('+')),
+              const SizedBox(width: 10),
+              ElevatedButton(onPressed: _decrementar, child: const Text('-')),
+              const SizedBox(width: 10),
+              ElevatedButton(onPressed: _resetar, child: const Text('Resetar')),
             ],
           ),
         ],

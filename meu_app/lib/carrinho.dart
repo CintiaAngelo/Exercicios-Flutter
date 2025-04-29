@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(CarrinhoApp());
+void main() => runApp(const CarrinhoApp());
 
 class CarrinhoApp extends StatelessWidget {
   const CarrinhoApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: CarrinhoPage());
+    return const MaterialApp(home: CarrinhoPage());
   }
 }
 
+// ✅ Corrigido: construtor com super.key e classe pública
 class CarrinhoPage extends StatefulWidget {
+  const CarrinhoPage({super.key});
+
   @override
-  _CarrinhoState createState() => _CarrinhoState();
+  State<CarrinhoPage> createState() => CarrinhoState(); // ✅ classe pública
 }
 
-class _CarrinhoState extends State<CarrinhoPage> {
+// ✅ Classe pública (removido o underline)
+class CarrinhoState extends State<CarrinhoPage> {
   int _contador = 0;
 
   void _incrementar() {
@@ -40,7 +44,15 @@ class _CarrinhoState extends State<CarrinhoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Carrinho de Compras")),
+      appBar: AppBar(
+        title: const Text("Carrinho de Compras"),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(
@@ -48,9 +60,9 @@ class _CarrinhoState extends State<CarrinhoPage> {
           children: [
             Text(
               'Itens no carrinho: $_contador',
-              style: TextStyle(fontSize: 24),
+              style: const TextStyle(fontSize: 24),
             ),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             Text(
               _contador == 0
                   ? "Status: Carrinho vazio"
@@ -60,20 +72,20 @@ class _CarrinhoState extends State<CarrinhoPage> {
                 color: _contador == 0 ? Colors.red : Colors.green,
               ),
             ),
-            SizedBox(height: 32),
+            const SizedBox(height: 32),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(onPressed: _incrementar, child: Text("Adicionar")),
-                SizedBox(width: 12),
-                ElevatedButton(onPressed: _decrementar, child: Text("Remover")),
+                ElevatedButton(onPressed: _incrementar, child: const Text("Adicionar")),
+                const SizedBox(width: 12),
+                ElevatedButton(onPressed: _decrementar, child: const Text("Remover")),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: _resetar,
               style: ElevatedButton.styleFrom(backgroundColor: Colors.grey),
-              child: Text("Esvaziar"),
+              child: const Text("Esvaziar"),
             ),
           ],
         ),
